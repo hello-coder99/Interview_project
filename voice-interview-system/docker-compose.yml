@@ -1,0 +1,33 @@
+version: "3.9"
+
+services:
+  flask_app:
+    build: ./flask_app
+    container_name: flask_app
+    ports:
+      - "5000:5000"
+    depends_on:
+      - postgres
+      - redis
+  whisper_worker:
+    build: ./whisper_worker
+    container_name: whisper_worker
+    depends_on:
+      - redis
+
+  postgres:
+    image: postgres:15
+    container_name: interview_postgres
+    environment:
+      POSTGRES_USER: interview
+      POSTGRES_PASSWORD: interview
+      POSTGRES_DB: interview_db
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+  redis:
+    image: redis:7
+    container_name: interview_redis
+
+volumes:
+  pgdata:
+   
