@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title> USER INFO EXTRACT PAGE </title>
+		<style>
+			body{
+				text-align:center;
+			}
+		</style>
+	</head>
+	<body>
+		<h1> Get user information </h1>
+		<input id="username" type="text" placeholder="username">
+		<br>
+		<input id="userrole" type="text" placeholder="role">
+		<br>
+		<button onclick="func()">submit</button>
+		<pre id="output"></pre>
+		<script>
+			function func(){
+				let x=document.getElementById("username").value;
+				let z=document.getElementById("userrole").value;
+				let y=document.getElementById("output");
+				fetch("/admin/get_info",{
+					method:"POST",
+					headers:{
+						"Content-Type":"application/json"
+					},
+					body: JSON.stringify({
+						"username":x,
+						"userrole":z
+				})
+					.then(res=>res.json())
+					.then(data=>y.innerText=JSON.stringify(data,null,2));
+			}
+		</script>
+	</body>
+</html>
+

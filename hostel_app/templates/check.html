@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title> USER INFO EXTRACT PAGE </title>
+		<style>
+			body{
+				text-align:center;
+			}
+		</style>
+	</head>
+	<body bgcolor="red">
+		<h1> Get user information </h1>
+		<form action="/admin/get_info" method="POST">
+			<input name="username" type="text" placeholder="username">
+			<br>
+			<input name="userrole" type="text" placeholder="role">
+			<br>
+			<button type="submit">submit</button>
+		</form>
+		<ol>
+			<li> {{ userid }} </li>
+			<li> {{ username }} </li>
+			<li> {{ email }} </li>
+			<li> {{ role }} </li>
+		</ol>
+	</body>
+</html>
+

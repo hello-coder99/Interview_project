@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title> ROCK,PAPER,SCISSORS</title>
+		<style>
+			body{
+				text-align:center;
+			}
+		</style>
+	</head>
+	<body id="back">
+		<h1>GAME (ROCK,PAPER,SCISSOR) </h1>
+		<h2> YOUR CHOICE </h2>
+		<img id="image1" height=100px width=100px>
+		<h2> COMPUTER CHOICE </h2>
+		<img id="image2" height=100px width=100px>
+		<br>
+		<br>
+		<input id="input_id" placeholder="rock/paper/scissor">
+		<br>
+		<button onclick="func()">enter</button>
+		<br>
+		<h1 id="cham"></h1>
+		<script>
+			let image1=document.getElementById("image1");
+			let image2=document.getElementById("image2");
+			let back=document.getElementById("back");
+			let jsonData;
+			let originalData;
+			image1.src="./static/images/default.jpg";
+			image2.src="./static/images/default.jpg";
+			function func(){
+				let x=document.getElementById("input_id").value;
+				let y=document.getElementById("cham");
+				fetch("/",{
+					method:"POST",
+					headers:{
+						"Content-Type":"application/json"
+					},
+					body: JSON.stringify({"choice":x})
+				})
+					.then(res=>res.json())
+					.then(data=>jsonData=JSON.stringify(data))
+					.then(jsonData=>originalData=JSON.parse(jsonData));
+				y.innerText=originalData.result;
+				image1.src=originalData.img1;
+				image2.src=originalData.img2;
+				if(originalData.result=="Computer wins"){
+					back.style.backgroundColor="red";
+				}
+				else if(originalData.result=="You win"){
+					back.style.backgroundColor="lime";
+				}
+				else{
+					back.style.backgroundColor="yellow";
+				}
+
+			}
+		</script>
+	</body>
+</html>

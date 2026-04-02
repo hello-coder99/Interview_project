@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Camera Access</title>
+	</head>
+	<body>
+		<h2>Open Camera</h2>
+		<video id="video" width="400" autoplay></video>
+		<script>
+			const video=document.getElementById('video');
+
+			navigator.mediaDevices.getUserMedia({
+				video:true})
+				.then(function(stream){
+					video.srcObject=
+						stream;
+				})
+				.catch(function(error){
+					alert("Error accessing camera",error);
+				});
+		</script>
+	</body>
+</html>
