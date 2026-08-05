@@ -10,17 +10,29 @@
 	</head>
 	<body>
 		<h1> Get user information </h1>
+		<h1 id="statu">{ { Status } } </h1>
 		<input id="username" type="text" placeholder="username">
 		<br>
 		<input id="userrole" type="text" placeholder="role">
 		<br>
-		<button onclick="func()">submit</button>
-		<pre id="output"></pre>
+		<button onclick="func()">View</button>
+		<li id="out1"></li>
+		<li id="out2"></li>
+		<li id="out3"></li>
+		<li id="out4"></li>
+		<h1>Get email update</h1>
+		<input id="userid" type="text" placeholder="userid">
+		<input id="newemail" type="text" placeholder="newemail">
+		<br>
+		<button onclick="update_func()">Update</button>
+		<br>
+		<input id="delete_id" type="text" placeholder="userid">
+		<button onclick="delete_func()">DELETE USER</button>
+		<pre id="statu"></pre>
 		<script>
 			function func(){
 				let x=document.getElementById("username").value;
 				let z=document.getElementById("userrole").value;
-				let y=document.getElementById("output");
 				fetch("/admin/get_info",{
 					method:"POST",
 					headers:{
@@ -29,10 +41,50 @@
 					body: JSON.stringify({
 						"username":x,
 						"userrole":z
+					})
 				})
 					.then(res=>res.json())
-					.then(data=>y.innerText=JSON.stringify(data,null,2));
+					.then(data=>{
+						document.getElementById("out1").innerText=data.id;
+						document.getElementById("out2").innerText=data.user;
+						document.getElementById("out3").innerText=data.email;
+						document.getElementById("out4").innerText=data.role;
+					});
 			}
+			function update_func(){
+				let x=document.getElementById("userid").value;
+				let y=document.getElementById("newemail").value;
+				fetch("/admin/update-profile",{
+					method:"POST",
+					headers:{
+						"Content-Type":"application/json"
+					},
+					body: JSON.stringify({
+						"userid":x,
+						"email":y
+					})
+				})
+					.then(res=>res.json())
+					.then(data=>{document.getElementById("statu").innerText=data.statu;
+					})
+
+			}
+			function delete_func(){
+				let x=document.getElementById("delete_id").value;
+				fetch("/admin/delete-profile",{
+					method:"POST",
+					headers:{
+						"Content-Type":"application/json"
+					},
+					body: JSON.stringify({
+						"delete_id",x
+					})
+				})
+					.then(res=>res.json())
+					.then(data=>{document.getElementById("statu").innerText=data.statu;
+					})
+			}
+
 		</script>
 	</body>
 </html>

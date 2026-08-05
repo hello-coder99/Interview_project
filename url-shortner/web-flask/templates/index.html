@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>URL Shortner</title>
+		<style>
+			body{
+				text-align:center;
+			}
+			h1{
+				color:red;
+				background-color:aqua;
+			}
+			h3{
+				color:red;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>URL Shortner</h1>
+		<p>Welcome! to our site.</p>
+		<form action="/" method="POST">
+			<input name="url" placeholder="Enter url here">
+			<br><br>
+			<input type="submit">
+		</form>
+		<hr>
+		<h3>Your Short URL </h3>
+		<a>{{ h_url }}</a>
+		<a>{{ h2_url }}</a>
+	</body>
+</html>

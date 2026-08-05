@@ -71,3 +71,44 @@ def get_user_info(username,role):
     if result:
         return result
     return None
+
+def update_profile(userid, email):
+    connection = conn()
+    if not connection:
+        return "Connection failed"
+        
+    cursor = connection.cursor()
+    
+    # Use %s for ALL placeholders to ensure proper escaping and type handling
+    sql = "UPDATE users SET email=%s WHERE id=%s"
+    
+    try:
+        # Pass values as a tuple
+        cursor.execute(sql, (email, userid))
+        connection.commit()
+        cursor.close()
+        connection.close()
+        return "ok"
+    except mysql.connector.Error as err:
+        print(f"Error updating profile: {err}")
+        cursor.close()
+        connection.close()
+        return "error"
+
+def delete_user(userid):
+    connection=conn()
+    if not connection:
+        return "connection failed"
+    cursor=connection.cursor()
+    sql="DELETE FROM users WHERE id=%s"
+    try:
+        cursor.execute(sql,(userid,))
+        connection.commit()
+        cursor.close()
+        connection.close()
+        return "ok"
+    except mysql.connector.Error as err:
+        print(f"Error while deleting user: {err}")
+        cursor.close()
+        connection.close()
+        return "error"
