@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#06070b" />
+    <title>Zoya</title>
+    <link rel="preconnect" href="https://esm.sh" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}" />
+    <script type="module" src="{{ url_for('static', filename='js/app.js') }}"></script>
+  </head>
+  <body>
+    <main class="shell" data-state="disconnected">
+      <section class="stage" aria-label="Zoya voice assistant">
+        <div class="brand" aria-hidden="true">
+          <span class="brand-mark"></span>
+          <span>Zoya</span>
+        </div>
+
+        <div class="orbital" aria-hidden="true">
+          <span class="ring ring-one"></span>
+          <span class="ring ring-two"></span>
+          <span class="ring ring-three"></span>
+          <div class="waveform">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </div>
+
+        <button class="power-button" id="powerButton" type="button" aria-label="Start Zoya">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 2.75v8.5" />
+            <path d="M7.25 5.9a8 8 0 1 0 9.5 0" />
+          </svg>
+        </button>
+
+        <div class="status-stack" aria-live="polite" aria-atomic="true">
+          <p class="state-label" id="stateLabel">Disconnected</p>
+          <p class="quip" id="quip">Ready when you are, darling.</p>
+        </div>
+
+        <div class="signal" aria-hidden="true">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

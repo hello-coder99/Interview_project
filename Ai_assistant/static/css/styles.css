@@ -1,0 +1,398 @@
+:root {
+  color-scheme: dark;
+  --bg: #06070b;
+  --ink: #f6f7fb;
+  --muted: #9299aa;
+  --teal: #29f4d5;
+  --rose: #ff4d88;
+  --amber: #ffcf5f;
+  --violet: #8d7dff;
+  --glass: rgba(255, 255, 255, 0.08);
+  --border: rgba(255, 255, 255, 0.18);
+  --shadow: rgba(41, 244, 213, 0.32);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  min-height: 100%;
+  margin: 0;
+}
+
+body {
+  overflow: hidden;
+  background:
+    linear-gradient(115deg, rgba(41, 244, 213, 0.13), transparent 32%),
+    linear-gradient(245deg, rgba(255, 77, 136, 0.14), transparent 34%),
+    linear-gradient(180deg, rgba(255, 207, 95, 0.08), transparent 42%),
+    linear-gradient(150deg, #06070b 0%, #10121d 45%, #080910 100%);
+  color: var(--ink);
+  font-family:
+    Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+}
+
+button {
+  font: inherit;
+}
+
+.shell {
+  min-height: 100dvh;
+  display: grid;
+  place-items: center;
+  padding: clamp(1rem, 4vw, 2.5rem);
+  position: relative;
+  isolation: isolate;
+}
+
+.shell::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 46px 46px;
+  mask-image: radial-gradient(circle, black 38%, transparent 78%);
+}
+
+.shell::after {
+  content: "";
+  position: fixed;
+  inset: auto 12vw 8vh 12vw;
+  height: 1px;
+  z-index: -1;
+  background: linear-gradient(90deg, transparent, rgba(41, 244, 213, 0.55), transparent);
+  box-shadow: 0 0 64px rgba(41, 244, 213, 0.5);
+}
+
+.stage {
+  width: min(100%, 34rem);
+  min-height: min(44rem, calc(100dvh - 2rem));
+  display: grid;
+  grid-template-rows: auto 1fr auto auto;
+  align-items: center;
+  justify-items: center;
+  gap: clamp(1rem, 4vw, 1.5rem);
+  position: relative;
+}
+
+.brand {
+  align-self: start;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  color: rgba(246, 247, 251, 0.88);
+  font-size: 0.9rem;
+  font-weight: 800;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.brand-mark {
+  width: 0.72rem;
+  height: 0.72rem;
+  border-radius: 999px;
+  background: conic-gradient(from 120deg, var(--teal), var(--rose), var(--amber), var(--teal));
+  box-shadow: 0 0 24px rgba(41, 244, 213, 0.72);
+}
+
+.orbital {
+  width: min(80vw, 23rem);
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  translate: -50% -54%;
+  pointer-events: none;
+}
+
+.ring {
+  position: absolute;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  filter: drop-shadow(0 0 24px rgba(41, 244, 213, 0.16));
+}
+
+.ring-one {
+  inset: 7%;
+  border-top-color: rgba(41, 244, 213, 0.75);
+  animation: spin 12s linear infinite;
+}
+
+.ring-two {
+  inset: 18%;
+  border-right-color: rgba(255, 77, 136, 0.65);
+  animation: spin 9s linear infinite reverse;
+}
+
+.ring-three {
+  inset: 30%;
+  border-bottom-color: rgba(255, 207, 95, 0.72);
+  animation: spin 7s linear infinite;
+}
+
+.waveform {
+  width: min(45vw, 12rem);
+  height: 5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.48rem;
+  opacity: 0.2;
+  transition: opacity 180ms ease;
+}
+
+.waveform span {
+  width: 0.38rem;
+  height: 1.3rem;
+  border-radius: 999px;
+  background: linear-gradient(180deg, var(--teal), var(--rose));
+  box-shadow: 0 0 18px rgba(41, 244, 213, 0.42);
+  transform-origin: center;
+  animation: wave 900ms ease-in-out infinite;
+  animation-play-state: paused;
+}
+
+.waveform span:nth-child(2) {
+  animation-delay: 90ms;
+}
+
+.waveform span:nth-child(3) {
+  animation-delay: 180ms;
+}
+
+.waveform span:nth-child(4) {
+  animation-delay: 270ms;
+}
+
+.waveform span:nth-child(5) {
+  animation-delay: 360ms;
+}
+
+.waveform span:nth-child(6) {
+  animation-delay: 450ms;
+}
+
+.waveform span:nth-child(7) {
+  animation-delay: 540ms;
+}
+
+.power-button {
+  width: clamp(7.8rem, 40vw, 11rem);
+  aspect-ratio: 1;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  align-self: center;
+  color: var(--ink);
+  background:
+    radial-gradient(circle at 42% 30%, rgba(255, 255, 255, 0.25), transparent 18%),
+    linear-gradient(145deg, rgba(41, 244, 213, 0.18), rgba(255, 77, 136, 0.18)),
+    rgba(255, 255, 255, 0.06);
+  box-shadow:
+    inset 0 0 36px rgba(255, 255, 255, 0.08),
+    0 0 0 0 rgba(41, 244, 213, 0.2),
+    0 30px 90px rgba(0, 0, 0, 0.42);
+  cursor: pointer;
+  position: relative;
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.power-button::after {
+  content: "";
+  position: absolute;
+  inset: 0.8rem;
+  border-radius: inherit;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.power-button:hover {
+  transform: translateY(-2px) scale(1.01);
+  border-color: rgba(41, 244, 213, 0.5);
+}
+
+.power-button:active {
+  transform: scale(0.98);
+}
+
+.power-button svg {
+  width: 38%;
+  height: 38%;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.45));
+}
+
+.power-button:disabled {
+  cursor: wait;
+  opacity: 0.72;
+}
+
+.status-stack {
+  width: min(100%, 24rem);
+  min-height: 6rem;
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  gap: 0.45rem;
+  text-align: center;
+}
+
+.state-label {
+  margin: 0;
+  color: rgba(246, 247, 251, 0.95);
+  font-size: clamp(1.35rem, 7vw, 2.5rem);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: 0;
+}
+
+.quip {
+  max-width: 18rem;
+  margin: 0;
+  color: var(--muted);
+  font-size: clamp(0.95rem, 3.8vw, 1.05rem);
+  line-height: 1.35;
+}
+
+.signal {
+  align-self: end;
+  display: flex;
+  gap: 0.55rem;
+  padding-bottom: 0.35rem;
+}
+
+.signal span {
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.18);
+  transition:
+    background-color 180ms ease,
+    box-shadow 180ms ease,
+    transform 180ms ease;
+}
+
+.shell[data-state="connecting"] .power-button {
+  animation: breathe 1.3s ease-in-out infinite;
+  border-color: rgba(255, 207, 95, 0.58);
+  box-shadow: 0 0 50px rgba(255, 207, 95, 0.22);
+}
+
+.shell[data-state="listening"] .power-button {
+  border-color: rgba(41, 244, 213, 0.72);
+  box-shadow:
+    0 0 0 0 rgba(41, 244, 213, 0.28),
+    0 0 72px rgba(41, 244, 213, 0.34);
+  animation: pulse 1.8s ease-out infinite;
+}
+
+.shell[data-state="speaking"] .power-button {
+  border-color: rgba(255, 77, 136, 0.72);
+  box-shadow:
+    0 0 0 0 rgba(255, 77, 136, 0.28),
+    0 0 76px rgba(255, 77, 136, 0.38);
+}
+
+.shell[data-state="listening"] .waveform,
+.shell[data-state="speaking"] .waveform {
+  opacity: 1;
+}
+
+.shell[data-state="listening"] .waveform span,
+.shell[data-state="speaking"] .waveform span {
+  animation-play-state: running;
+}
+
+.shell[data-state="speaking"] .waveform span {
+  animation-duration: 620ms;
+}
+
+.shell[data-state="connecting"] .signal span:nth-child(1),
+.shell[data-state="listening"] .signal span:nth-child(1),
+.shell[data-state="speaking"] .signal span:nth-child(1) {
+  background: var(--amber);
+  box-shadow: 0 0 18px rgba(255, 207, 95, 0.55);
+  transform: scale(1.15);
+}
+
+.shell[data-state="listening"] .signal span:nth-child(2),
+.shell[data-state="speaking"] .signal span:nth-child(2) {
+  background: var(--teal);
+  box-shadow: 0 0 18px rgba(41, 244, 213, 0.55);
+  transform: scale(1.15);
+}
+
+.shell[data-state="speaking"] .signal span:nth-child(3) {
+  background: var(--rose);
+  box-shadow: 0 0 18px rgba(255, 77, 136, 0.55);
+  transform: scale(1.15);
+}
+
+@keyframes spin {
+  to {
+    rotate: 360deg;
+  }
+}
+
+@keyframes pulse {
+  70% {
+    box-shadow:
+      0 0 0 2.2rem rgba(41, 244, 213, 0),
+      0 0 76px rgba(41, 244, 213, 0.36);
+  }
+}
+
+@keyframes breathe {
+  50% {
+    transform: scale(1.035);
+  }
+}
+
+@keyframes wave {
+  0%,
+  100% {
+    transform: scaleY(0.55);
+  }
+
+  50% {
+    transform: scaleY(2.3);
+  }
+}
+
+@media (min-width: 720px) {
+  .stage {
+    width: min(100%, 42rem);
+    min-height: min(48rem, calc(100dvh - 4rem));
+  }
+
+  .orbital {
+    width: min(58vw, 27rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 1ms !important;
+  }
+}
