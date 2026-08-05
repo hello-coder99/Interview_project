@@ -1,0 +1,35 @@
+version: "3.9"
+services:
+  database:
+    image: mysql:5.7
+    container_name: my_sql
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: 1234
+      MYSQL_DATABASE: mydb
+    restart: always
+    volumes:
+      - ./maria_db/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - mariadb_data:/var/lib/mysql
+
+  cache:
+    image: redis:7
+    container_name: my_redis
+    ports:
+      - "6379:6379"
+    restart: always
+
+  web:
+    build:
+      context: ./web-interface
+    container_name: my_web
+    ports:
+      - "5000:5000"
+    restart: always
+    depends_on:
+      - database
+      - cache
+
+volumes:
+  mariadb_data:

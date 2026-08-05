@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>My web</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1.0">
+		<link rel="stylesheet" href="{{ url_for('static',filename='css/style.css') }}">
+	</head>
+	<body>
+		<script src="{{ url_for('static',filename='js/script.js') }}"></script>
+		<h1>Welcome to Password Manager!! </h1>
+		<div class="box1">
+			<h2>fetch password from names</h2>
+			<input type="text" id="Name" placeholder="NAME">
+			<input type="submit" onclick="fetch_password()" value="get password">
+			<p id="output1">output</p>
+			<button onclick="copyText()">copy</button>
+		</div>
+		<br><hr>
+		<div class="box2">
+			<h2> fetch all names</h2>
+			<input type="submit" onclick="get_all()" value="fetch all saved">
+			<p id="output2">output</p>
+		</div>
+		<br><hr>
+		<div class="box3">
+			<h2> store the name and password </h2>
+			<input type="text" id="Name2" placeholder="NAME:">
+			<br>
+			<input type="text" id="pass" placeholder="PASSWORD:">
+			<br>
+			<input type="submit" onclick="store_data()" value="store password">
+			<p id="output3">output</p>
+		</div>
+		<br><hr>
+		<div class="box4">
+			<h2> delete the name and password </h2>
+			<input type="text" id="Name3" placeholder="NAME:">
+			<br><br>
+			<input type="submit" onclick="delete_data()" value="delete password">
+			<p id="output4">output</p>
+		</div>
+		<br><hr>
+	</body>
+</html>
