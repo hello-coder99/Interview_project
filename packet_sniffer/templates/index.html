@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Packet Analyzer Dashboard</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Live capture</p>
+          <h1>Packet Analyzer Dashboard</h1>
+        </div>
+        <div class="status-pill" id="statusPill">
+          <span class="status-dot"></span>
+          <span id="statusText">Connecting</span>
+        </div>
+      </header>
+
+      <section class="metrics" aria-label="Packet metrics">
+        <article class="metric-card">
+          <span>Total</span>
+          <strong id="totalCount">0</strong>
+        </article>
+        <article class="metric-card">
+          <span>TCP</span>
+          <strong id="tcpCount">0</strong>
+        </article>
+        <article class="metric-card">
+          <span>UDP</span>
+          <strong id="udpCount">0</strong>
+        </article>
+        <article class="metric-card">
+          <span>Other</span>
+          <strong id="otherCount">0</strong>
+        </article>
+      </section>
+
+      <section class="toolbar" aria-label="Dashboard controls">
+        <label class="search-box">
+          <span>Filter</span>
+          <input id="filterInput" type="search" placeholder="IP address or protocol" />
+        </label>
+        <div class="actions">
+          <button id="pauseButton" type="button">Pause</button>
+          <button id="clearButton" type="button">Clear</button>
+          <button id="exportButton" type="button">Export CSV</button>
+        </div>
+      </section>
+
+      <section class="table-wrap" aria-label="Captured packets">
+        <table>
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Source IP</th>
+              <th>Destination IP</th>
+              <th>Protocol</th>
+            </tr>
+          </thead>
+          <tbody id="packetTable">
+            <tr class="empty-row">
+              <td colspan="4">No packets captured yet.</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+    </main>
+
+    <script src="/static/app.js"></script>
+  </body>
+</html>
